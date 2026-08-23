@@ -1,0 +1,30 @@
+name: nemo_crypto_keystore
+description: OS keystore/Keychain MasterKeyCache implementation for nemo_crypto.
+version: 0.1.0
+resolution: workspace
+
+repository: https://github.com/skynemo/nemo_crypto/tree/main/packages/nemo_crypto_keystore
+issue_tracker: https://github.com/skynemo/nemo_crypto/issues
+
+topics:
+  - keystore
+  - keychain
+  - biometrics
+  - security
+  - encryption
+
+environment:
+  sdk: ^3.12.0
+  flutter: ">=3.44.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_secure_storage: ^11.0.0
+  nemo_crypto: ^0.1.0
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_secure_storage_platform_interface: ^2.0.1
+  flutter_test:
+    sdk: flutter

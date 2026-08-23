@@ -1,0 +1,11 @@
+name: nemo_crypto_workspace
+description: Workspace root for the nemo_crypto packages. Not published.
+publish_to: none
+
+environment:
+  sdk: ^3.12.0
+
+workspace:
+  - packages/nemo_crypto
+  - packages/nemo_crypto_hive
+  - packages/nemo_crypto_keystore

@@ -1,0 +1,51 @@
+name: Nemo Crypto CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - package: packages/nemo_crypto
+            test_cmd: dart test
+          - package: packages/nemo_crypto_hive
+            test_cmd: dart test
+          - package: packages/nemo_crypto_keystore
+            test_cmd: flutter test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install libsodium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsodium-dev
+
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: ${{ matrix.package }}
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+        working-directory: ${{ matrix.package }}
+
+      - name: Analyze project source
+        run: flutter analyze
+        working-directory: ${{ matrix.package }}
+
+      - name: Run tests
+        run: ${{ matrix.test_cmd }}
+        working-directory: ${{ matrix.package }}
