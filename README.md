@@ -1,6 +1,6 @@
 # 🛡️ Nemo Crypto Workspace
 
-[![Dart CI](https://github.com/skynemo/nemo_crypto/actions/workflows/dart.yml/badge.svg)](https://github.com/skynemo/nemo_crypto/actions)
+[![Dart CI](https://github.com/skynemo/nemo_crypto/actions/workflows/ci.yml/badge.svg)](https://github.com/skynemo/nemo_crypto/actions)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 > **A suite of pure Dart primitives for local-first, end-to-end encrypted (E2EE) applications.**
