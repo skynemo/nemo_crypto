@@ -1,7 +1,6 @@
 name: nemo_crypto_hive
 description: Hive-backed WrapStore implementation for nemo_crypto.
 version: 0.1.0
-publish_to: none
 resolution: workspace
 
 repository: https://github.com/skynemo/nemo_crypto/tree/main/packages/nemo_crypto_hive
