@@ -6,3 +6,5 @@ pubspec.lock
 .idea/
 .fvm
 **/doc/api/
+.DS_Store
+**/.DS_Store
