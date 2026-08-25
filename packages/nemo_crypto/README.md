@@ -77,11 +77,14 @@ final decrypted = NemoCipher.openPadded(sealed, unlockedKey);
 unlockedKey.dispose();
 ```
 
-## 🔒 Security Architecture
+## ⚠️ Threat Model & Caveats
 
-- **Key Wrapping:** Master keys are encrypted under KEKs (Key Encryption Keys), enabling multiple independent unlock paths (passphrase, recovery key, biometrics).
-- **Length Obfuscation:** Ciphertext sizes are rounded to predefined buckets to prevent metadata leaks based on payload length.
-- **The Vault:** An isolated inner compartment with its own passphrase. Opening the primary keyring does not unlock the Vault, making it perfect for highly sensitive records.
-- **Memory Hygiene:** Long-lived key material is stored in libsodium `SecureKey` instances, utilizing guarded native memory pages that zero out automatically upon `dispose()`.
+Nemo Crypto protects data against unauthorized physical or logical access when the keyring is locked, and mitigates GPU/ASIC brute-force attacks via device-calibrated Argon2id. However, you must be aware of its boundaries:
 
-For detailed information on the Threat Model and architecture, refer to the [Main Workspace Repository](https://github.com/skynemo/nemo_crypto).
+- **No Independent Audit:** This package relies on standard primitives but has not undergone an independent security review. Use at your own discretion
+- **Keys in Memory:** While the keyring is unlocked, keys reside in active memory. If the host process or OS is compromised, the keys are compromised
+- **Cached Key = Usable Key:** If you use a cache adapter (like [`nemo_crypto_keystore`](https://pub.dev/packages/nemo_crypto_keystore)), a cached master key is available under protection that cache offers. A biometric prompt on launch is actually a UI gate. The cryptographic protection is bypassed until you explicitly call `keyring.forgetCachedKey()`.
+- **Backup Vulnerability:** The output of `exportBackup()` is offline-crackable at exactly the strength of the user's passphrase, without rate limits. Treat backups as highly sensitive data.
+- **Memory Wiping is Best-Effort:** `CryptoUtils.wipe` provides best-effort buffer clearing. Long-lived key material is stored in libsodium `SecureKey` instances, which utilize guarded native memory pages that zero out automatically upon `dispose()`.
+
+For detailed information on the architecture, refer to the [Main Workspace Repository](https://github.com/skynemo/nemo_crypto).

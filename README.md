@@ -7,15 +7,19 @@
 
 Nemo Crypto provides a production-ready key hierarchy and authenticated encryption architecture built on [libsodium](https://doc.libsodium.org/). It is designed from the ground up for Zero-Knowledge synchronization, meaning your servers never see the keys, the data, or even the exact size of the payloads.
 
+## ⚠️ Security & Audit Disclaimer
+
+While Nemo Crypto is built on standard, well-regarded cryptographic primitives (XChaCha20-Poly1305, Argon2id) and applies them strictly by the book, **this library has not been independently audited by a third-parties.** Use it at your own, especially in regulated or high-stakes environments
+
 ## 📦 The Ecosystem
 
 This repository is a monorepo containing the following packages. You can use the core package on its own, or plug in the official adapters for instant Flutter integration.
 
-| Package                                                          | Version                                                                                                                | Description                                                                                                                                                                                        |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 🔐 **[`nemo_crypto`](./packages/nemo_crypto)**                   | [![pub package](https://img.shields.io/pub/v/nemo_crypto.svg)](https://pub.dev/packages/nemo_crypto)                   | The core cryptography engine. Manages the key hierarchy, Argon2id stretching, and AEAD encryption. Pure Dart.                                                                                      |
-| 🔑 **[`nemo_crypto_keystore`](./packages/nemo_crypto_keystore)** | [![pub package](https://img.shields.io/pub/v/nemo_crypto_keystore.svg)](https://pub.dev/packages/nemo_crypto_keystore) | A `MasterKeyCache` implementation backed by OS-level secure storage (Keychain, Keystore, Secret Service, etc.) via `flutter_secure_storage`. Supports cross-platform silent unlock and biometrics. |
-| 🐝 **[`nemo_crypto_hive`](./packages/nemo_crypto_hive)**         | [![pub package](https://img.shields.io/pub/v/nemo_crypto_hive.svg)](https://pub.dev/packages/nemo_crypto_hive)         | A `WrapStore` implementation backed by [Hive CE](https://pub.dev/packages/hive_ce). Handles persistent storage of wrapped keys.                                                                    |
+| Package                                                          | Version                                                                                                                | Description                                                                                                                                                                                                                       |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🔐 **[`nemo_crypto`](./packages/nemo_crypto)**                   | [![pub package](https://img.shields.io/pub/v/nemo_crypto.svg)](https://pub.dev/packages/nemo_crypto)                   | The core cryptography engine. Manages the key hierarchy, Argon2id stretching, and AEAD encryption. Pure Dart.                                                                                                                     |
+| 🔑 **[`nemo_crypto_keystore`](./packages/nemo_crypto_keystore)** | [![pub package](https://img.shields.io/pub/v/nemo_crypto_keystore.svg)](https://pub.dev/packages/nemo_crypto_keystore) | A `MasterKeyCache` implementation backed by OS-level secure storage (Keychain, Keystore, Secret Service, etc.) via `flutter_secure_storage`. Supports silent unlock everywhere, and biometrics where the platform can enforce it. |
+| 🐝 **[`nemo_crypto_hive`](./packages/nemo_crypto_hive)**         | [![pub package](https://img.shields.io/pub/v/nemo_crypto_hive.svg)](https://pub.dev/packages/nemo_crypto_hive)         | A `WrapStore` implementation backed by [Hive CE](https://pub.dev/packages/hive_ce). Handles persistent storage of wrapped keys.                                                                                                   |
 
 ## 💡 Why Nemo Crypto?
 
